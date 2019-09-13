@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+*,
+button {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  display: grid;
+  height: 100vh;
+  margin: 0;
+  grid-template-rows: .5fr 9fr;
+  grid-template-areas: "header"
+                        "main";
+}
+
+nav {
+  box-shadow: 0px 5px 5px #80808030;
+  grid-area: header;
+}
+
+nav>div>img {
+  height: 57px;
+}
+
+nav>h1 {
+  margin-top: 14px;
+  margin-bottom: 10px;
+}
+
+main {
+  background-image: url('img/beyonce-COB-bw.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: 2136px;
+  grid-area: main;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.margin-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.block {
+  display: block;
+}
+
+.game-start {
+  margin-top: 180px;
+}
+
+input {
+  margin-bottom: 7px;
+  margin-right: 50px;
+  margin-left: 50px;
+  height: 35px;
+  width: 225px;
+}
+
+button {
+  background-color: black;
+  color: white;
+  height: 41px;
+}
+
+button:disabled {
+  background: #808080b3;
+}
+
+a {
+  text-decoration: none;
+}
+.names {
+  margin-top: 7px;
+  margin-right: 215px;
+  margin-left: 52px;
+}
+.play-game {
+  width: 564px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.inputs {
+  margin-bottom: 100px;
+}
+
+.game-start {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  background-color: black;
+  position: absolute;
+  height: 57px;
+  left: 0;
+}
+
+.error-1 {
+  position: relative;
+  cursor: default;
+}
+
+.hide {
+  display: none;
+}
+
+.no-hide {
+  display: block;
+}
+
+/* Direction Page */
+
+.directions {
+  width: 568px;
+  margin-top: 180px;
+}
+
+.player-welcome {
+  margin-top: 100px;
+}
+
+article>p {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* Game.html */
+
+article {
+  border: 1px solid black;
+  box-shadow: 5px 5px 10px #80808069;
+  font-size: 90px;
+  font-weight: bold;
+  height: 130px;
+  text-align: center;
+  width: 85px;
+}
+
+.game {
+  background-image: none;
+  display: grid;
+  margin: 0;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1.2fr 3fr 1.2fr;
+  grid-template-areas: "player1" "game" "player2";
+}
+
+.game-player1 {
+  background-color: black;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.game-player2 {
+  background-color: black;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.game-cards {
+  display: grid;
+  margin: 0;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "row-1"
+                        "row-2"
+                        "row-3";
+}
+
+.row-1 {
+  align-items: center;
+  grid-area: row-1;
+  display: flex;
+  justify-content: space-around;
+}
+
+.row-2 {
+  align-items: center;
+  grid-area: row-2;
+  display: flex;
+  justify-content: space-around;
+}
+
+.row-3 {
+  align-items: center;
+  grid-area: row-3;
+  display: flex;
+  justify-content: space-around;
+}
