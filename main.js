@@ -1,6 +1,6 @@
 //Variables
 var player = [];
-var deck = [];
+
 
 if (localStorage.length > 0) {
 player = JSON.parse(localStorage.getItem('player'))
@@ -13,38 +13,54 @@ class Player {
     this.name2 = player2;
   }
 }
-//
-// Each card should get its data from an object instance of a Card class
-// Each card should have a matchInfo property which will hold the same value as the card that matches it. You can determine how to format that matching value. Each card should also have a matched property, a boolean, that will default to false and toggle to true once a match has been made.
-// Each card should have a method match on it
-// All card object instances should be held in the Deck class
-// The Deck should have cards, matchedCards, selectedCards, and matches as properties. The Deck should have the following methods: shuffle, checkSelectedCards, and moveToMatched. If you find a need for additional methods, write/use them!
+
 
 class Deck {
   constructor() {
-    this.cards = 0;
-    this.matchedCards = 0;
-    this.selectedCards = 0;
-    this.matches = 0;
+    this.cards = [];
+    this.matchedCards = [];
+    this.selectedCards = [];
+    this.matches = [];
   }
 
   shuffle() {
-
+    var nums = [1,1,2,2,3,3,4,4,5,5];
+    for (var i = 0; i < 10; i++) {
+      var rand = Math.floor(Math.random() * nums.length);
+      var card = new Card(nums[rand], i);
+      deck.cards.push(card);
+      document.querySelectorAll('.card')[i].classList.add(parseInt(deck.cards[i].matchInfo));
+      document.querySelectorAll('.card')[i].id = deck.cards[i].id;
+      nums.splice(rand, 1);
+    }
   }
 
   checkSelectedCards() {
-
+    if (this.selectedCards[0].matchInfo === this.selectedCards[1].matchInfo) {
+      deckMatch(parseInt(document.querySelectorAll('.flip-vertical-right')[0].classList[1]));
+      document.querySelectorAll('.flip-vertical-right')[0].classList.add('swing-out-top-fwd');
+      document.querySelectorAll('.flip-vertical-right')[1].classList.add('swing-out-top-fwd');
+      document.querySelectorAll('.flip-vertical-right')[1].classList.remove('flip-vertical-right');
+      document.querySelectorAll('.flip-vertical-right')[0].classList.remove('flip-vertical-right');
+      this.selectedCards.splice(0, 2)
+    } else {
+      this.selectedCards.splice(0, 2)
+      setTimeout(flipBack, 2500)
+    }
   }
 
-  moveToMatched() {
-
+  moveToMatched(card) {
+    this.matchedCards.push(card)
   }
 }
 
+var deck = new Deck;
+
 class Card {
-  constructor(num) {
+  constructor(num, id) {
     this.matchInfo = num;
     this.matched = false;
+    this.id = id;
   }
 
   match() {
@@ -91,39 +107,60 @@ function clickMain() {
  }
 
  //game.html
- for (i = 0; i < document.querySelectorAll('.card').length; i++) {
+
+deck.shuffle();
+
+for (i = 0; i < document.querySelectorAll('.card').length; i++) {
   var random = Math.round(Math.random() * 360);
- document.querySelectorAll('.card')[i].style.transform = `rotate(${random}deg)`
+  document.querySelectorAll('.card')[i].style.transform = `rotate(${random}deg)`
 }
 
 function cardFlip(event) {
-  winner();
+  // winnerMessage();
   if (document.querySelectorAll('.flip-vertical-right').length < 2) {
- event.target.closest('article').classList.add('flip-vertical-right');
-}
-  if (document.querySelectorAll('.flip-vertical-right')[0].classList.toString() === document.querySelectorAll('.flip-vertical-right')[1].classList.toString()) {
-    document.querySelectorAll('.flip-vertical-right')[0].classList.add('swing-out-top-fwd');
-    document.querySelectorAll('.flip-vertical-right')[1].classList.add('swing-out-top-fwd');
-    flipBack()
-  } else {
-    setTimeout(flipBack, 2000)
+    event.target.closest('article').classList.add('flip-vertical-right');
+    selectedCards();
+    cardBack(event);
+    deck.checkSelectedCards();
   }
-
 }
 
-function winner() {
-// if (document.querySelectorAll('.swing-out-top-fwd').length === 10) {
-  document.querySelector('main').innerHTML = `<section class="text-center margin-auto directions">
-    <h2 class="player-welcome">WECLOME <span class="player1"></span> AND <span class="player2"></span>!</h2>
-    <article class="text-left">
+function selectedCards() {
+    for (i = 0; i < 10; i++) {
+      if (deck.cards[i].id === parseInt(event.target.closest('article').id))
+      {
+        deck.selectedCards.push(deck.cards[event.target.closest('article').id])
+      }
+    }
+    }
 
-    </article>
-    <a href="game.html" class="block"><button type="button" name="button" class="play-game">PLAY GAME</button></a>
-  </section>`
-// }
+function deckMatch(match) {
+  for (i = 0; i < 10; i++) {
+    if (deck.cards[i].matchInfo === match)
+    {
+      deck.cards[i].match();
+      deck.moveToMatched(deck.cards[i]);
+    }
+  }
 }
+
+// function winnerMessage() {
+//   for (i = 0; i < 10; i++) {
+//
+//   }
+//   document.querySelector('main').innerHTML = `<section class="text-center margin-auto directions">
+//     <h2 class="player-welcome">WECLOME <span class="player1"></span> AND <span class="player2"></span>!</h2>
+//     <article class="text-left">
+//
+//     </article>
+//     <a href="game.html" class="block"><button type="button" name="button" class="play-game">PLAY GAME</button></a>
+//   </section>`
+//   }
+
 
 function flipBack() {
+    document.querySelectorAll('.flip-vertical-right')[0].innerHTML = "B";
+    document.querySelectorAll('.flip-vertical-right')[1].innerHTML = "B";
     document.querySelectorAll('.flip-vertical-right')[1].classList.remove('flip-vertical-right');
     document.querySelectorAll('.flip-vertical-right')[0].classList.remove('flip-vertical-right');
 }
@@ -133,33 +170,7 @@ function gameNames() {
   document.querySelector('.game-player-name-2').innerHTML = player[0].name2.toUpperCase();
 }
 
-
-function cardNumber() {
-var nums = [1,1,2,2,3,3,4,4,5,5];
-for (var i = 0; i < 10; i++) {
-  var rand = Math.floor(Math.random() * nums.length);
-  document.querySelectorAll('.card')[i].classList.add(nums[rand])
-  nums.splice(rand, 1)
-}
-}
-
-// class Card {
-//   constructor(num) {
-//     this.matchInfo = num;
-//     this.matched = false;
-//   }
-//
-//   match() {
-//     this.matched = true;
-//   }
-// }
-
-
-function cardBack() {
-for (var i = 0; i < 5; i++) {
-  var card = new Card(i)
-  document.querySelectorAll('.card')[i].innerHTML = document.querySelectorAll('.card')[0].innerHTML = `<img style="
-    height: 130px; width:85px" src="img/bey${i}.jpg" />
-"<img style="height: 130px; width:85px"/>`
-}
+function cardBack(event) {
+  event.target.closest('article').innerHTML = `<img style="
+       height: 130px; width:85px" src="img/bey${event.target.closest('article').classList[1]}.jpg"/>`
 }
