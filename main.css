@@ -54,7 +54,7 @@ main {
   display: block;
 }
 
-.game-start {
+ .game-start-info {
   margin-top: 180px;
 }
 
@@ -94,10 +94,10 @@ a {
   margin-bottom: 100px;
 }
 
-.game-start {
+/* .game-start {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .menu {
   background-color: black;
@@ -137,7 +137,8 @@ article>p {
 
 /* Game.html */
 
-article {
+.card {
+  background: white;
   border: 1px solid black;
   box-shadow: 5px 5px 10px #80808069;
   font-size: 90px;
@@ -145,7 +146,9 @@ article {
   height: 130px;
   text-align: center;
   width: 85px;
+  z-index: -1;
 }
+
 
 .game {
   background-image: none;
@@ -158,14 +161,18 @@ article {
 
 .game-player1 {
   background-color: black;
+  color: white;
   margin-top: 20px;
   margin-left: 20px;
+  z-index: 1;
 }
 
 .game-player2 {
   background-color: black;
+  color: white;
   margin-top: 20px;
   margin-right: 20px;
+  z-index: 1;
 }
 
 .game-cards {
@@ -196,4 +203,73 @@ article {
   grid-area: row-3;
   display: flex;
   justify-content: space-around;
+}
+
+.matched {
+  font-size: 50px;
+}
+
+.flip-vertical-right {
+	-webkit-animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	        animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+@-webkit-keyframes flip-vertical-right {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+
+  }
+  100% {
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+}
+@keyframes flip-vertical-right {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+}
+
+.swing-out-top-fwd {
+	-webkit-animation: swing-out-top-fwd 0.8s cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
+	        animation: swing-out-top-fwd 0.8s cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
+}
+
+@-webkit-keyframes swing-out-top-fwd {
+  0% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotateX(70deg);
+            transform: rotateX(70deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+}
+@keyframes swing-out-top-fwd {
+  0% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotateX(70deg);
+            transform: rotateX(70deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
 }
