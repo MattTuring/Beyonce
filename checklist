@@ -1,0 +1,2 @@
+Single page refactor
+ “Top 5 Winner Board” should be available for the user to view when clicking the icon in top right corner. It should include the names of the 5 winners who won the game in the shortest amount of time, as well as the time they required to win. When the icon is clicked again, the board should no longer be visible.

@@ -37,6 +37,17 @@ main {
   grid-area: main;
 }
 
+.score-board {
+  background-color: black;
+  box-shadow: 5px 5px 5px #808080d1;
+  color: white;
+  height: 260px;
+  position: absolute;
+  top: 58px;
+  width: 200px;
+  display: none;
+}
+
 .text-center {
   text-align: center;
 }
