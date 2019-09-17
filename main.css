@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-
+/* general html */
 *,
 button {
   font-family: 'Open Sans', sans-serif;
@@ -109,7 +109,7 @@ a {
 .inputs {
   margin-bottom: 100px;
 }
-
+/* modified start/end page */
 .final-message {
   margin-top: 30px;
   margin-bottom: 30px;
@@ -161,12 +161,13 @@ article>p {
   margin-bottom: 50px;
 }
 
-/* Game.html */
+/* Game page */
 
 .card {
   background: white;
   border: 1px solid black;
   box-shadow: 5px 5px 10px #80808069;
+  cursor: pointer;
   font-size: 90px;
   font-weight: bold;
   height: 130px;
@@ -246,6 +247,7 @@ article>p {
 
 }
 
+/* Animations */
 .flip-vertical-right {
 	-webkit-animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 	        animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
@@ -309,4 +311,28 @@ article>p {
             transform-origin: top;
     opacity: 0;
   }
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 674px) {
+  .inputs {
+    display: none;
+  }
+
+  	[name~=player1],
+    [name~=player2] {
+      margin-bottom: 100px;
+    }
+
+    .play-game {
+      width: 64%;
+    }
+
+    .directions {
+      width: 95%;
+    }
+
+    .game {
+      display: contents;
+    }
 }

@@ -108,6 +108,7 @@ function clickMain() {
   if (document.querySelectorAll('.card').length === 10) {
     cardFlip(event);
   }
+
   if (document.querySelector('.play-game') != null && document.querySelector('.play-game').disabled === false && document.querySelectorAll('input').length === 2) {
     var newPlayer1 = new Player(document.querySelectorAll('input')[0].value);
     var newPlayer2 = new Player(document.querySelectorAll('input')[1].value);
@@ -116,11 +117,11 @@ function clickMain() {
     localStorage.setItem('player', JSON.stringify(player));
     directions(event);
   }
+
   if (document.querySelector('.text-left') != null && document.querySelector('.text-left').innerText.length === 583 && event.target.classList.contains('go')) {
     game(event);
   }
 }
-
 
  function startInputs(event) {
    if (document.querySelectorAll('input').length === 2) {
@@ -143,7 +144,7 @@ function scoreBoard(event) {
     document.querySelector('aside').classList.add('no-hide')
     document.querySelector('.scores').innerHTML = ""
   for (var i = 0; i < 5; i++) {
-    document.querySelector('.scores').innerHTML += `<p>${i + 1}. ${sorter()[i].name} ${sorter()[i].score}<p>`
+    document.querySelector('.scores').innerHTML += `<p class="high-score">${i + 1}. ${sorter()[i].name} ${sorter()[i].score}<p>`
 }
 } else {
     document.querySelector('aside').classList.remove('no-hide')
@@ -166,7 +167,7 @@ function scoreBoard(event) {
  }
  }
 
-
+// Creates game page
  function game(event) {
      document.querySelector('main').classList.add('game');
      document.querySelector('main').innerHTML = `<section class="game-player1 text-center">
@@ -176,7 +177,6 @@ function scoreBoard(event) {
              <p>MATCHES THIS ROUND</p>
              <span class="matched bold">0</span>
              <hr>
-             <h3>GAME WINS</h3>
            </section>
            <section class="game-cards">
              <div class="row-1">
@@ -243,7 +243,6 @@ function scoreBoard(event) {
              <p>MATCHES THIS ROUND</p>
              <span class="matched bold">0</span>
              <hr>
-             <h3>GAME WINS</h3>
            </section>`
            deck.shuffle();
            rotate();
@@ -305,32 +304,33 @@ function winningPlayer() {
   }
 }
 
+//creates winning page
 function winnerMessage() {
-if (deck.matchedCards.length === 10) {
-  var score = (Math.round(Date.now()/1000) - gameStart)/60
-  player[0].score = parseFloat(score.toFixed(2))
-  player[1].score = parseFloat(score.toFixed(2))
-  localStorage.setItem('player', JSON.stringify(player));
-  document.querySelector('main').classList.remove('game');
-  document.querySelector('main').innerHTML = `<section class="text-center margin-auto directions">
-    <h2 class="player-welcome">CONGRATULATIONS <span class="player1">${winningPlayer()}!</h2>
-    <article class="final-message">
-    It took you ${score.toFixed(2)} minutes to beat the game!
-    </article>
-    <article class="final-message">
-    Click below to keep playing!
-    </article>
-  <button type="button" name="button" class="final-game new">NEW GAME</button> <button type="button" name="button" class="final-game rematch">REMATCH</button>
-  </section>`
+  if (deck.matchedCards.length === 10) {
+    var score = (Math.round(Date.now()/1000) - gameStart)/60
+    player[0].score = parseFloat(score.toFixed(2))
+    player[1].score = parseFloat(score.toFixed(2))
+    localStorage.setItem('player', JSON.stringify(player));
+    document.querySelector('main').classList.remove('game');
+    document.querySelector('main').innerHTML = `<section class="text-center margin-auto directions">
+      <h2 class="player-welcome">CONGRATULATIONS <span class="player1">${winningPlayer()}!</h2>
+      <article class="final-message">
+      It took you ${score.toFixed(2)} minutes to beat the game!
+      </article>
+      <article class="final-message">
+      Click below to keep playing!
+      </article>
+    <button type="button" name="button" class="final-game new">NEW GAME</button> <button type="button" name="button" class="final-game rematch">REMATCH</button>
+    </section>`
   }
-  }
+}
 
 function sorter() {
   var scoreArray = [];
   for (var i = 0; i < player.length; i++) {
     if (player[i].score > 0) {
     scoreArray.push({name: player[i].name, score: player[i].score})
-  }
+    }
   }
   return scoreArray.sort(function(a, b){return a.score - b.score});
 }
@@ -354,19 +354,19 @@ function cardBack(event) {
 
  function playerTurn() {
    if (document.querySelector('.game-player-name-1').classList.contains('going') != true) {
-   document.querySelector('.game-player-name-1').classList.add('going')
-   document.querySelector('.game-player-name-2').classList.add('not-going')
-   document.querySelector('.game-player-name-2').classList.remove('going')
-   document.querySelector('.game-player-name-1').classList.remove('not-going')
- } else {
-   document.querySelector('.game-player-name-2').classList.add('going')
-   document.querySelector('.game-player-name-1').classList.add('not-going')
-   document.querySelector('.game-player-name-1').classList.remove('going')
-   document.querySelector('.game-player-name-2').classList.remove('not-going')
- }
+     document.querySelector('.game-player-name-1').classList.add('going')
+     document.querySelector('.game-player-name-2').classList.add('not-going')
+     document.querySelector('.game-player-name-2').classList.remove('going')
+     document.querySelector('.game-player-name-1').classList.remove('not-going')
+   } else {
+     document.querySelector('.game-player-name-2').classList.add('going')
+     document.querySelector('.game-player-name-1').classList.add('not-going')
+     document.querySelector('.game-player-name-1').classList.remove('going')
+     document.querySelector('.game-player-name-2').classList.remove('not-going')
+  }
  }
 
-
+// handles rematch and play again
  function final(event) {
   if (event.target.classList.contains('rematch')) {
     deck = new Deck
@@ -380,7 +380,7 @@ function cardBack(event) {
     deck = new Deck
     document.querySelector('.game-start').innerHTML =
     `<section class="text-center game-start-info">
-      <input type="text" name="player1" value="" pattern="[A-Za-z]{32}"> <input type="text" name="player2" value="" pattern="[A-Za-z]{32}">
+      <input type="text" name="player1" value=""  maxlength="32" placeholder="PLAYER 1"> <input type="text" name="player2" value=""  maxlength="32" placeholder="PLAYER 2">
         <div class="inputs">
             <span class="names">PLAYER 1</span><span class="names">PLAYER 2</span>
         </div>
