@@ -144,7 +144,7 @@ function scoreBoard(event) {
     document.querySelector('aside').classList.add('no-hide')
     document.querySelector('.scores').innerHTML = ""
   for (var i = 0; i < 5; i++) {
-    document.querySelector('.scores').innerHTML += `<p class="high-score">${i + 1}. ${sorter()[i].name} ${sorter()[i].score}<p>`
+    document.querySelector('.scores').innerHTML += `<p class="high-score">${i + 1}. ${sorter()[i].name.toUpperCase()}</p><p> ${sorter()[i].score} MINUTES<p><hr>`
 }
 } else {
     document.querySelector('aside').classList.remove('no-hide')

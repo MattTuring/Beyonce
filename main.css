@@ -45,12 +45,15 @@ hr {
   background-color: black;
   box-shadow: 5px 5px 5px #808080d1;
   color: white;
-  height: 260px;
   position: absolute;
   top: 58px;
   width: 200px;
   display: none;
   z-index: 2;
+}
+
+.high-score {
+  font-weight: bold;
 }
 
 .text-center {
@@ -334,5 +337,17 @@ article>p {
 
     .game {
       display: contents;
+    }
+    nav>h1 {
+    margin-left: 50px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+   .game-player1 {
+     height: fit-content;
+   }
+    .card {
+      width: 75px;
     }
 }
